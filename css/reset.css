@@ -1,7 +1,6 @@
 .demo1 {
-    display: block;
     text-align: center;
-    margin: 50px auto;
+    margin-top: 20px;
 }
 textarea,input[type="checkbox"], input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
     background-color: #fff;
@@ -109,14 +108,15 @@ textarea {
     width: 20px;
     height: 20px;
     cursor: pointer;
-    margin: 20px auto;
+    margin: 0 auto;
 }
 .btn-submit{
-    margin: 20px;
+    margin: 5px;
 }
-.popover{
-    width: 900px;
-}
+
 .popover-content{
-    text-align: right;
+    text-align: inherit;
+}
+.form-group{
+    margin-top: 10px;
 }
