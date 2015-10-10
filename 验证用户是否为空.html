@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>验证用户是否为空</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+</head>
+<body>
+<div class="demo1">
+    <form id="form" >
+        <div class="form-group">
+            <label for="user" >用户名</label>
+            <div >
+                <input class="form-control" id="user" placeholder="用户名" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" >密码</label>
+            <div >
+                <input class="form-control" id="password" placeholder="密码" type="password">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="msg" >备注</label>
+            <div >
+                <textarea class="from-control" name="" id="msg" placeholder="备注" cols="47" rows="10"></textarea>
+            </div>
+        </div>
+            <div>
+                <input type="checkbox" class="checkbox"><span>记住我</span>
+            </div>
+            <div >
+                <button id="btn" type="button" class="btn btn-info btn-block btn-submit">提 交</button>
+            </div>
+        
+    </form>
+</div>
+	<script type="text/javascript" src="js/zepto.min.js"></script>
+	<script type="text/javascript">
+		//原生方法
+		(function(){
+			var form = document.getElementById('form');
+			var input = form.getElementsByTagName('input');
+			var textarea = form.getElementsByTagName('textarea');
+			var btn = document.getElementById('btn');
+			btn.onclick = function(){
+				checkNull();
+				return false ;
+			}
+			function init(){
+				for(var i = 0 ; i < input.length ; i++){
+					input[i].onfocus = function(){
+						error(this,'',1);
+					}
+				}
+			}
+			init();
+			function checkNull(){
+				for(var i = 0 ; i < input.length ; i++){
+					if(input[i].value.length < 1){
+						error(input[i],'不能为空');
+						input[i].className.indexOf('error') == -1 && (input[i].className += 'error');
+					}
+				}
+			}
+			function error(o,txt,show){
+				if(arguments.length == 3 && show){
+					o.tip && (o.tip.style.display = 'none');
+				}else{
+					if(o.className.search(/error/) == -1){
+						o.tip = over(o,txt);
+					}else{
+						o.tip.style.display = 'right';
+					}
+				}
+			}
+			function over(o,txt){
+				var pop = div('popover right');
+				var arr = div('arrow');
+				var content = div('popover-content');
+				content.appendChild(div('','p',txt));
+				pop.appendChild(content);
+				pop.appendChild(arr);
+				o.parentNode.insertBefore(pop,o.nextSibling);
+				return pop ;
+			}
+			function div(cls,tag,txt){
+				if(!tag){
+					tag = cls ; 
+				}
+				var d = document.createElement('div' || tag);
+				d.className = cls ;
+				txt && (d.innerHTML = txt);
+				return d;
+			}
+
+		})();
+		
+		/*
+		//jQuery方法
+		
+		*/
+	</script>
+</body>
+</html>
