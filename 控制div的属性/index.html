@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>控制div的属性</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+</head>
+<body>
+	<div id="outer">
+		<button id="btn" type="button" class="btn btn-info">变宽</button>
+		<button id="btn" type="button" class="btn btn-info">变高</button>
+		<button id="btn" type="button" class="btn btn-info">变色</button>
+		<button id="btn" type="button" class="btn btn-info">隐藏</button>
+		<button id="btn" type="button" class="btn btn-info">重置</button>
+		<div id="div1"></div>
+	</div>
+	<script type="text/javascript">
+		var changeStyle = function(elem,attr,value){
+		elem.style[attr] = value ;
+		};
+		window.onload = function(){
+			var btn = document.getElementsByTagName('button');
+			var div1 = document.getElementById('div1');
+			var attr = ["width","height","background","display","display"];
+			var val = ["400px","400px","red","none","block"];
+			for(var i = 0 ; i < btn.length ; i++){
+				btn[i].index = i ;
+				btn[i].onclick = function(){
+					this.index == btn.length - 1 && (div1.style.cssText = "");
+					changeStyle(div1,attr[this.index],val[this.index]);
+				}
+			}
+		}
+	</script>
+</body>
+</html>
