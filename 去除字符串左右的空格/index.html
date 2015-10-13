@@ -6,14 +6,12 @@
 	<link rel="stylesheet" type="text/css" href="css/reset.css">
 </head>
 <body>
-	<div class="container demo1">
+	<div id="outer">
 		<input class="input-xlarge focused" type="text" 
 		value="[          需要过滤的空格          ]" name="" id="input">
 		<button class="btn btn-info" id="btn">过 滤</button>
 	</div>
-	<script type="text/javascript" src="js/zepto.min.js"></script>
 	<script type="text/javascript">
-		//原生方法
 		(function(){
 			var input = document.getElementById('input');
 			var btn = document.getElementById('btn');
@@ -21,14 +19,6 @@
 				input.value = input.value.replace(/(\s|\u00A0)+(\s|\u00A0)+/g,'');
 			}
 		}());
-		/*
-		//jQuery方法
-		$(document).ready(function() {
-			$("#btn").click(function() {	
-				input.value = input.value.replace(/(\s|\u00A0)+(\s|\u00A0)+/g,'');		
-			});
-		});
-		*/
 	</script>
 </body>
 </html>
