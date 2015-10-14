@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数传参,改变div任意属性的值</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+</head>
+<body>
+    <div id="outer">
+        <p><label>属性名<input class="input-xlarge focused" type="text" value="color"/>
+        </label></p>
+        <p><label>属性值<input class="input-xlarge focused" type="text" value="red"/>
+        </label></p>
+        <button class="btn btn-info">确定</button>
+        <button class="btn btn-info">重置</button>
+        <div id="div1">输入"属性名"及"属性值"点击确定按钮</div>
+    </div>
+    
+    <script type="text/javascript">
+            var changeStyle = function(elem,attr,value){
+                elem.style[attr] = value ;
+            }
+            window.onload = function(){
+                var oDiv = document.getElementById('div1');
+                var oInput = document.getElementsByTagName("input");
+                var oBtn = document.getElementsByTagName("button");
+                
+                oBtn[0].onclick = function(){
+                    changeStyle(oDiv, oInput[0].value, oInput[1].value);
+                }
+                oBtn[1].onclick = function(){
+                    oDiv.removeAttribute("style");
+                }
+            }
+    </script>
+</body>
+</html>
+
+
