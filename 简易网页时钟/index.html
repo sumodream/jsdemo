@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>简易网页时钟</title>
+	<style type="text/css">
+		body,div{margin: 0;padding: 0;}
+		#clock{width: 300px;text-align: center;background: #49afcd;margin: 100px auto;padding: 20px 0;border-radius: 4px; color: white;font-size: 18px;}
+		span{color: #DA70D6;width: 80px;background: #fbfbfb;border: 2px solid #b4b4b4;margin: 0 10px;padding: 0 10px;line-height: 30px;border-radius: 4px;}
+	</style>
+</head>
+<body>
+	<div id="clock">
+		<span></span>点<span></span>分<span></span>秒
+	</div>
+	<script type="text/javascript">
+		window.onload = function(){
+			var oClock = document.getElementById('clock');
+			var oSpan = oClock.getElementsByTagName('span');
+			setInterval(getTimes,1000);
+			getTimes();
+			function getTimes(){
+				var oDate = new Date();
+				var gDate = [oDate.getHours(),oDate.getMinutes(),oDate.getSeconds()];
+				for(var i in gDate){
+					oSpan[i].innerHTML = format(gDate[i]);
+				}
+				function format(a){
+					return a.toString().replace(/^(\d)$/,"0$1");
+				}
+			}
+		}
+	</script>
+</body>
+</html>
