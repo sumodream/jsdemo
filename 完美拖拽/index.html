@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>完美拖拽</title>
+	<style type="text/css">
+		html,body{overflow:hidden;}
+		body,div,h2,p{margin:0;padding:0;}
+		body{color:black;background:white;font:12px/2 Arial;}
+		p{padding:0 10px;margin-top:10px;}
+		span{color:red;padding-left:5px;}
+		#box{position:absolute;width:300px;height:150px;background:white;border:2px solid #49afcd;top:50%;left:50%;margin:-75px 0 0 -150px;border-radius: 4px;}
+		#box h2{height:35px;cursor:move;background:orange;border-bottom:2px solid #49afcd;text-align:right;padding:0 10px;line-height: 35px;}
+		#box h2 a{color:black;font:12px/25px Arial;text-decoration:none;outline:none;}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<h2><a href="javascript:;">点击回放拖拽痕迹</a></h2>
+		<p><strong>Drag:</strong><span></span></p>
+		<p><strong>offsetTop:</strong><span></span></p>
+		<p><strong>offsetLeft:</strong><span></span></p>
+	</div>
+	<script type="text/javascript">
+		window.onload = function(){
+			var oBox = document.getElementById('box');
+			var oH2 = oBox.getElementsByTagName('h2')[0];
+			var oSpan = oBox.getElementsByTagName('span');
+			var oA = oBox.getElementsByTagName('a')[0];
+			var disX = disY = 0 ;
+			var oDrag = false ;
+			var oPos = [{x:oBox.offsetLeft,y:oBox.offsetTop}];
+		//鼠标按下 激活拖拽
+		oH2.onmousedown = function(event){
+			var event = event || window.event ;
+			oDrag = true ;
+			disX = event.clientX - oBox.offsetLeft ;
+			disY = event.clientY - oBox.offsetTop ;
+			oPos.push({x:oBox.offsetLeft , y:oBox.offsetTop});
+			this.setCapture && this.setCapture();
+			return false ;
+		}
+		//拖拽开始
+		document.onmouseover = function(event){
+			if(!oDrag){
+				return ;
+			}
+			var event = event || window.event ;
+			var oL = event.clientX - disX ;
+			var oT = event.clientY - disY ;
+			var maxL = document.documentElement.clientWidth - oBox.offsetWidth ;
+			var maxT = document.documentElement.clientHeight - oBox.offsetHeight ;
+			oL = oL < 0 ? 0 : oL ;
+			oL = oL > maxL ? maxL : oL ;
+			oT = oT < 0 ? 0 : oT ;
+			oT = oT > maxT ? maxT : oT ;
+			oBox.style.marginTop = oBox.style.marginLeft = 0 ;
+			oBox.style.left = oL + "px";
+			oBox.style.top = oT + "px";
+			oPos.push({x:oL,y:oT});
+			status();
+			return false ;
+		}
+		//鼠标释放 结束拖拽
+		document.onmouseup = window.onblur = oH2.onlosecapture = function(){
+			oDrag = false ;
+			oH2.releaseCapture && oH2.releaseCapture();
+			status();
+		}
+		//回放拖拽轨迹
+		oA.onclick = function(){
+			if(oPos.length == 1){
+				return ;
+			}
+			var timer = setInterval(function(){
+				var iPos = oPos.pop();
+				iPos ? (oBox.style.left = iPos.x + "px", oBox.style.top = iPos.y + "px", status()) : clearInterval(timer);
+			},30);
+			this.focus = false ; //去除链接虚线
+			return false ;
+		}
+		//阻止冒泡
+		oA.onmousedown = function(){
+			(event || window.event).cancelBubble = true ;
+		}
+		//监听状态函数
+		function status(){
+			oSpan[0].innerHTML = oDrag ;
+			oSpan[1].innerHTML = oBox.offsetTop;
+			oSpan[2].innerHTML = oBox.offsetLeft;
+		}
+		status();//初始调用
+	}
+	</script>
+</body>
+</html>
