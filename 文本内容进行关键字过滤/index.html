@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文本内容进行关键字过滤</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+</head>
+<body>
+<div class="outer">
+    <form id="form" role="form">
+        <div class="form-group">
+            <label for="msg">备注</label>
+            <div>
+                <textarea id="msg" maxlength="50" placeholder="共产党|中日|日本 将会被过滤"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <button id="btn" type="button" class="btn btn-primary btn-block">过滤</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="msg">结果</label>
+            <div>
+                <textarea id="msg2" maxlength="50" placeholder="备注"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+	var msg = document.getElementById('msg');
+	var msg2 = document.getElementById('msg2');
+	var btn = document.getElementById('btn');
+	var key = /共产党|中日|日本/g;
+	var v = '';
+	btn.onclick = function(){
+		v = msg.value;
+		msg2.value = v.replace(key,function(str){
+			var r = '';
+			for(var i = 0 ; i < str.length ; i++){
+				r += '*';
+			}
+			return r ;
+		});
+		return false ;
+	};
+
+</script>
+</body>
+</html>
