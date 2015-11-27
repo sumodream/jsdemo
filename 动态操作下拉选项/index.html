@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态操作下拉选项</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+</head>
+<body>
+    <div class="outer">
+    <div>
+        <div class="add">
+            <input type="text" name="" id="txt"/><a id="add" href="javascript:;"><button class="btn btn-info" id="btn">添加</button></a>
+        </div>
+        <select name="cont" id="city">
+            <option value="">北京</option>
+            <option value="">上海</option>
+            <option value="">深圳</option>
+        </select>
+        <div class="del"><a id="del" href="javascript:;"><button class="btn btn-info" id="btn">删除</button></a></div>
+    </div>
+</div>
+<script>
+        var txt = document.getElementById('txt');
+        var add = document.getElementById('add');
+        var del = document.getElementById('del');
+        var city = document.getElementById('city');
+        add.onclick = function(){
+            var v = checkTxt(txt);
+            if(v){
+                city.options.add(new Option(v, v));
+            }
+        }
+        del.onclick = function(){
+            //selectedIndex设置或返回下拉列表中备选选项的索引号
+            var i = city.selectedIndex;
+            city.options.remove(i);
+        }
+        function checkTxt(obj){
+            if(obj.value.length < 1){
+                alert('选项不能为空!');
+                return false;
+            }
+            return obj.value;
+        }
+</script>
+</body>
+</html>
