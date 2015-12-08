@@ -7,9 +7,9 @@
 </head>
 <body>
     <div id="outer">
-        <p><label>属性名<input class="input-xlarge focused" type="text" value="color"/>
+        <p><label>属性名<input class="input-xlarge focused" type="text" value="background"/>
         </label></p>
-        <p><label>属性值<input class="input-xlarge focused" type="text" value="red"/>
+        <p><label>属性值<input class="input-xlarge focused" type="text" value="pink"/>
         </label></p>
         <button class="btn btn-info">确定</button>
         <button class="btn btn-info">重置</button>
@@ -17,19 +17,20 @@
     </div>
     
     <script type="text/javascript">
+            //定义一个改变样式的函数
             var changeStyle = function(elem,attr,value){
                 elem.style[attr] = value ;
             }
             window.onload = function(){
-                var oDiv = document.getElementById('div1');
-                var oInput = document.getElementsByTagName("input");
-                var oBtn = document.getElementsByTagName("button");
-                
-                oBtn[0].onclick = function(){
-                    changeStyle(oDiv, oInput[0].value, oInput[1].value);
+                var div = document.getElementById('div1');
+                var input = document.getElementsByTagName('input');
+                var btn = document.getElementsByTagName('button');
+                btn[0].onclick = function(){
+                    //调用之前定义的函数
+                    changeStyle(div,input[0].value,input[1].value);
                 }
-                oBtn[1].onclick = function(){
-                    oDiv.removeAttribute("style");
+                btn[1].onclick = function(){
+                    div.removeAttribute('style');
                 }
             }
     </script>
