@@ -14,12 +14,12 @@
 		var myVal = function(a,b){
 			alert(a.value);
 			alert(b.value);
-		}
+		} 
 		window.onload = function(){
-			var oInput = document.getElementsByTagName('input');
-			var oBtn = document.getElementById('btn');
-			oBtn.onclick = function(){
-				myVal(oInput[0],oInput[1]);
+			var input = document.getElementsByTagName('input');
+			var btn = document.getElementById('btn');
+			btn.onclick = function(){
+				myVal(input[0],input[1]);
 			}
 		}
 	</script>
